@@ -216,3 +216,24 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ---------------------------------------------------------------------------
+# ERPNext- project-specific ignores
+# ---------------------------------------------------------------------------
+
+# cloned upstream frappe_docker (consumed by deploy-docker.sh)
+.frappe_docker/
+
+# generated compose + runtime env
+docker-compose.generated.yml
+.env.deploy
+docker/.env
+*.local.env
+
+# backups taken by scripts/backup.sh
+backups/
+
+# frappe build/cache artifacts inside the app tree
+apps/**/node_modules/
+apps/**/*.egg-info/
+apps/kenya_hr/.git

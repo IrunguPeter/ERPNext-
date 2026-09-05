@@ -1,0 +1,62 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2026-01-01 00:00:00.000000",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Approval Status",
+   "mandatory": 0,
+   "options": "\nDraft\nSubmitted\nApproved by Department Head\nApproved by Director\nEffective\nRejected",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "mandatory": 0,
+   "options": "Department",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Effective Date",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Effective Date",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letterhead": null,
+ "modified": "2026-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Kenya HR",
+ "name": "Staff Promotion Log",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Staff Promotion",
+ "report_name": "Staff Promotion Log",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Kenya HR Manager"
+  },
+  {
+   "role": "Administrator"
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

@@ -1,0 +1,323 @@
+{
+ "actions": [
+  {
+   "action_name": "Submit Promotion",
+   "label": "Submit",
+   "type": "Custom",
+   "hidden": 0,
+   "method": "submit_promotion"
+  },
+  {
+   "action_name": "Department Head Approve",
+   "label": "Approve (Dept Head)",
+   "type": "Custom",
+   "hidden": 0,
+   "method": "approve_by_department_head"
+  },
+  {
+   "action_name": "Director Approve",
+   "label": "Approve (Director)",
+   "type": "Custom",
+   "hidden": 0,
+   "method": "approve_by_director"
+  },
+  {
+   "action_name": "Mark Effective",
+   "label": "Mark Effective",
+   "type": "Custom",
+   "hidden": 0,
+   "method": "mark_effective"
+  },
+  {
+   "action_name": "Reject",
+   "label": "Reject",
+   "type": "Custom",
+   "hidden": 0,
+   "method": "reject"
+  }
+ ],
+ "creation": "2026-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_party",
+  "promotion_type",
+  "employee",
+  "employee_name",
+  "column_break_3",
+  "department",
+  "effective_date",
+  "section_current",
+  "current_designation",
+  "current_grade",
+  "column_break_8",
+  "new_designation",
+  "new_grade",
+  "section_justification",
+  "justification",
+  "recommended_by",
+  "column_break_12",
+  "approval_status",
+  "rejection_reason",
+  "section_approvals",
+  "submitted_by",
+  "approved_by_department_head",
+  "column_break_16",
+  "approved_by_director",
+  "rejected_by",
+  "effective_date_confirmed",
+  "section_audit",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_party",
+   "fieldtype": "Section Break",
+   "label": "Promotion Parties"
+  },
+  {
+   "default": "Regular",
+   "fieldname": "promotion_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Promotion Type",
+   "options": "Regular\nActing\nUpgrade"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee.department",
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fieldname": "effective_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Effective Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_current",
+   "fieldtype": "Section Break",
+   "label": "Current vs New"
+  },
+  {
+   "fetch_from": "employee.designation",
+   "fieldname": "current_designation",
+   "fieldtype": "Data",
+   "label": "Current Designation",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.custom_grade",
+   "fieldname": "current_grade",
+   "fieldtype": "Data",
+   "label": "Current Grade",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "new_designation",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "New Designation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "new_grade",
+   "fieldtype": "Data",
+   "label": "New Grade"
+  },
+  {
+   "fieldname": "section_justification",
+   "fieldtype": "Section Break",
+   "label": "Justification"
+  },
+  {
+   "fieldname": "justification",
+   "fieldtype": "Text Editor",
+   "label": "Justification / Appraisal Summary"
+  },
+  {
+   "fieldname": "recommended_by",
+   "fieldtype": "Link",
+   "label": "Recommended By",
+   "options": "User"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "approval_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Approval Status",
+   "options": "Draft\nSubmitted\nApproved by Department Head\nApproved by Director\nEffective\nRejected",
+   "read_only": 1
+  },
+  {
+   "fieldname": "rejection_reason",
+   "fieldtype": "Small Text",
+   "label": "Rejection Reason",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_approvals",
+   "fieldtype": "Section Break",
+   "label": "Approval Trail"
+  },
+  {
+   "fieldname": "submitted_by",
+   "fieldtype": "Link",
+   "label": "Submitted By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "approved_by_department_head",
+   "fieldtype": "Link",
+   "label": "Approved by Department Head",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "approved_by_director",
+   "fieldtype": "Link",
+   "label": "Approved by Director",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "rejected_by",
+   "fieldtype": "Link",
+   "label": "Rejected By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "effective_date_confirmed",
+   "fieldtype": "Date",
+   "label": "Date Confirmed Effective",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_audit",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Staff Promotion",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 0,
+ "links": [],
+ "modified": "2026-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Kenya HR",
+ "name": "Staff Promotion",
+ "naming_rule": "Expression",
+ "autoname": "PRO-HR-.YYYY.-.#####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Kenya HR Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Administrator",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "HR Officer",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Kenya Department Head",
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Senior HR Approver",
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Employee",
+   "write": 0
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1,
+ "translated_doctype": 1
+}
