@@ -1,11 +1,11 @@
-# Kenya HR container image
+# Kenya HR + Kenya Procurement container image
 #
 # Stage 2 of a two-stage build.
 #
 #   Stage 1 (in frappe_docker): builds `erpnext-hrms:16` from docker/apps.json
 #       using the official `images/layered/Containerfile`.
-#   Stage 2 (this file): takes that image and copies this repository's
-#       custom Kenya HR app into the bench `apps/` directory.
+#   Stage 2 (this file): takes that image and copies this repository's custom
+#       apps (kenya_hr, kenya_procurement) into the bench `apps/` directory.
 #
 # Build from the repository root:
 #
@@ -19,9 +19,12 @@ FROM ${BASE_IMAGE}
 
 USER root
 
-# Bring the Kenya HR app source into the bench and give it to the frappe user.
+# Bring the custom app sources into the bench and give them to the frappe user.
 COPY apps/kenya_hr /home/frappe/frappe-bench/apps/kenya_hr
+COPY apps/kenya_procurement /home/frappe/frappe-bench/apps/kenya_procurement
 RUN chown -R frappe:frappe /home/frappe/frappe-bench/apps/kenya_hr \
-    && rm -rf /home/frappe/frappe-bench/apps/kenya_hr/.git
+    && chown -R frappe:frappe /home/frappe/frappe-bench/apps/kenya_procurement \
+    && rm -rf /home/frappe/frappe-bench/apps/kenya_hr/.git \
+      /home/frappe/frappe-bench/apps/kenya_procurement/.git
 
 USER frappe

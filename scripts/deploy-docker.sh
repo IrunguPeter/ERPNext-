@@ -8,10 +8,10 @@
 # It performs the following steps (each one is independently re-runnable):
 #   1. Clones frappe_docker (pinned ref) into ./.frappe_docker
 #   2. Builds a custom image with ERPNext + HRMS (docker/apps.json)
-#   3. Layers the Kenya HR app on top (docker/Containerfile.kenya_hr)
+#   3. Layers the Kenya HR + Kenya Procurement apps on top (docker/Containerfile.kenya_hr)
 #   4. Generates the final compose file
 #   5. Starts all containers
-#   6. Creates a site and installs erpnext, hrms, kenya_hr
+#   6. Creates a site and installs erpnext, hrms, kenya_hr, kenya_procurement
 #
 # Usage:
 #   ./scripts/deploy-docker.sh [options]
@@ -115,7 +115,7 @@ docker build \
   --file=images/layered/Containerfile .
 popd >/dev/null
 
-echo "==> Layering Kenya HR app ..."
+echo "==> Layering Kenya HR + Kenya Procurement apps ..."
 docker build \
   -f docker/Containerfile.kenya_hr \
   --build-arg BASE_IMAGE=erpnext-hrms:16 \
@@ -172,6 +172,8 @@ else
   RUN --site "$SITE" install-app hrms
   echo "==> Installing kenya_hr ..."
   RUN --site "$SITE" install-app kenya_hr
+  echo "==> Installing kenya_procurement ..."
+  RUN --site "$SITE" install-app kenya_procurement
 fi
 
 docker compose -f "$COMPOSE_OUT" exec backend bench --site "$SITE" clear-cache >/dev/null 2>&1 || true

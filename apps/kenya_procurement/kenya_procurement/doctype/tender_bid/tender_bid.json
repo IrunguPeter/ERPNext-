@@ -1,0 +1,103 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-09-05 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "supplier",
+  "supplier_onboarding",
+  "bid_reference",
+  "submitted_on",
+  "amount",
+  "result",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Supplier",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "supplier_onboarding",
+   "fieldtype": "Link",
+   "label": "Supplier Onboarding",
+   "options": "Supplier Onboarding"
+  },
+  {
+   "fieldname": "bid_reference",
+   "fieldtype": "Data",
+   "label": "E-GP Bid Reference"
+  },
+  {
+   "fieldname": "submitted_on",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Submitted On"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Bid Amount"
+  },
+  {
+   "fieldname": "result",
+   "fieldtype": "Select",
+   "label": "Result",
+   "options": "\nSubmitted\nResponsive\nUnder Evaluation\nUnresponsive\nAwarded\nNot Awarded",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_virtual": 0,
+ "links": [],
+ "modified": "2026-09-05 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Kenya Procurement",
+ "name": "Tender Bid",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Procurement Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Administrator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Procurement Officer",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,17 +1,20 @@
 # ERPNext- · Kenya HR & ERP
 
-An **ERPNext v16** deployment pre-configured for Human Resources, with a custom
-**Kenya HR** app that adds statutory leave, national identity fields, and a
-multi-stage promotion workflow.
+An **ERPNext v16** deployment pre-configured for Human Resources and
+procurement, with two custom apps:
+
+- **Kenya HR** — statutory leave, national identity fields, multi-stage promotions
+- **Kenya Procurement** — E-GP (Electronic Government Procurement) mirror:
+  supplier onboarding, tender tracking, and an opt-in gateway connector
 
 > Self-documenting project: every script, doc, and module in this repository
 > explains itself. Start at [Quickstart](docs/01-quickstart.md).
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│  ERPNext v16  +  HRMS  +  kenya_hr (custom HR app)            │
+│  ERPNext v16  +  HRMS  +  kenya_hr  +  kenya_procurement      │
 │                                                              │
-│  Employees · Leave Management · Promotions · HRIS-K sync     │
+│  HR · Leave · Promotions · HRIS-K · Procurement · E-GP        │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -20,6 +23,7 @@ multi-stage promotion workflow.
 | Path | Purpose |
 | --- | --- |
 | [`apps/kenya_hr/`](apps/kenya_hr/) | Custom Frappe app: Kenya employee fields, statutory leave types, Staff Promotion workflow, Kenya HR Settings, HRIS-K client |
+| [`apps/kenya_procurement/`](apps/kenya_procurement/) | Custom Frappe app: E-GP procurement - Supplier Onboarding, Tender/Bid mirroring, Kenya EGP Settings, opt-in connector |
 | [`docker/`](docker/) | Image build files (`apps.json`, `Containerfile.kenya_hr`) and env template |
 | [`scripts/`](scripts/) | Repeatable ops: deploy, teardown, bench, backup, restore |
 | [`docs/`](docs/) | Full documentation (all guides) |
@@ -34,8 +38,8 @@ multi-stage promotion workflow.
 Then open **http://erp.localhost:8080** — `Administrator` / `admin`
 (add `127.0.0.1 erp.localhost` to `/etc/hosts`).
 
-The deploy script builds a custom image with ERPNext + HRMS, layers the Kenya
-HR app on top, and creates a site with all three apps installed. See
+The deploy script builds a custom image with ERPNext + HRMS, layers both custom
+apps on top, and creates a site with all four apps installed. See
 [Deployment](docs/02-docker-deployment.md) for production options (domains,
 passwords, ports, SSL, updates).
 
@@ -52,6 +56,19 @@ passwords, ports, SSL, updates).
 See the [HR configuration guide](docs/04-hr-configuration.md) and the
 [app walkthrough](docs/05-kenya-hr-app.md).
 
+## Procurement features (from the custom app)
+
+- **Supplier Onboarding** — E-GP profile: BRS registration no., KRA PIN,
+  authorised rep / ID, business categories, AGPO (youth/women/PWD), E-GP status
+- **Tender mirroring** — `Tender` records keyed on E-GP Tender ID
+  (reference no., procuring entity, method, start/end datetimes), embedded bid table
+- **Kenya EGP Settings** — master switch + API gateway endpoint/token (Password)
+- **Optional E-GP connector** — opt-in `egp_sync.py`: daily pull of tenders and
+  supplier status via a gateway endpoint (the public portal has no REST API)
+- **Tender Pipeline report** — status breakdown chart + deadlines table
+
+See [Procurement & E-GP integration](docs/11-procurement-egp.md).
+
 ## Documentation index
 
 | Topic | Doc |
@@ -66,6 +83,7 @@ See the [HR configuration guide](docs/04-hr-configuration.md) and the
 | Backup & restore | [08-backup-restore.md](docs/08-backup-restore.md) |
 | Architecture | [09-architecture.md](docs/09-architecture.md) |
 | Fleet management (optional) | [10-fleet-management-reference.md](docs/10-fleet-management-reference.md) |
+| Procurement & E-GP | [11-procurement-egp.md](docs/11-procurement-egp.md) |
 
 Root-level `*.md` guides (`erpnext-setup-guide.md`, `erpnext-customization-guide.md`,
 `erpnext-fleet-management-guide.md`) are the original planning material that
@@ -75,7 +93,8 @@ this project was built on; keep them for reference.
 
 ```
 .
-├── apps/kenya_hr/            # the custom HR app (installable via bench)
+├── apps/kenya_hr/            # custom HR app (installable via bench)
+├── apps/kenya_procurement/   # custom procurement app (installable via bench)
 ├── docker/                   # image build + env template
 ├── scripts/                  # deploy / teardown / bench / backup / restore
 ├── docs/                     # documentation (start here)

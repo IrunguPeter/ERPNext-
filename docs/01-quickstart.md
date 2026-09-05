@@ -31,6 +31,7 @@ Open **http://erp.localhost:8080** and log in with `Administrator` / `admin`.
 | `erpnext` | Full ERP: accounts, buying, selling, stock, projects |
 | `hrms` | Employees, Leave Application, Payroll, Attendance |
 | `kenya_hr` | Kenya employee ID fields, statutory leave types, Staff Promotion workflow, Kenya HR Settings |
+| `kenya_procurement` | E-GP procurement: Supplier Onboarding, Tender mirroring, bids, Kenya EGP Settings |
 
 The `kenya_hr` app is installed *automatically*; its `after_install` creates:
 
@@ -39,6 +40,11 @@ The `kenya_hr` app is installed *automatically*; its `after_install` creates:
 - Leave Types: Annual Leave, Sick Leave, Maternity Leave, Paternity Leave,
   Compassionate Leave, Study Leave
 - Roles: `Kenya HR Manager`, `Kenya Department Head`, `Senior HR Approver`, `HR Officer`
+
+The `kenya_procurement` app is installed too; its `after_install` creates the
+`Procurement Manager` and `Procurement Officer` roles and a `Kenya EGP Settings`
+single. The E-GP connector stays **off** until you enable it (see
+[Procurement & E-GP](11-procurement-egp.md)).
 
 ## Try the HR features
 
@@ -49,6 +55,15 @@ The `kenya_hr` app is installed *automatically*; its `after_install` creates:
    (`Draft` → `Submitted` → `Approved by Department Head` →
    `Approved by Director` → `Effective`).
 4. **Configure the app** — Kenya HR → Kenya HR Settings.
+
+## Try the procurement features
+
+1. **Onboard a supplier** — Kenya Procurement → Supplier Onboarding → New
+   (BRS registration no., KRA PIN, AGPO, E-GP status).
+2. **Mirror a tender** — Kenya Procurement → Tender → New (or enable the
+   connector in Kenya EGP Settings to pull tenders automatically).
+3. **Add bids** — open a tender → Tender Bids child table.
+4. **Review the pipeline** — Kenya Procurement → Reports → Tender Pipeline.
 
 ## Stop / remove
 
@@ -67,3 +82,4 @@ The `kenya_hr` app is installed *automatically*; its `after_install` creates:
 - [Roles & permissions](07-roles-permissions.md)
 - [Backup & restore](08-backup-restore.md)
 - [Architecture](09-architecture.md)
+- [Procurement & E-GP](11-procurement-egp.md)
