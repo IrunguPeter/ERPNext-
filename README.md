@@ -1,20 +1,24 @@
-# ERPNext- · Kenya HR & ERP
+# ERPNext- · Kenya HR, Procurement & Fleet
 
-An **ERPNext v16** deployment pre-configured for Human Resources and
-procurement, with two custom apps:
+An **ERPNext v16** deployment pre-configured for Human Resources, procurement
+and fleet management for the Kenyan public sector, with three custom apps:
 
 - **Kenya HR** — statutory leave, national identity fields, multi-stage promotions
 - **Kenya Procurement** — E-GP (Electronic Government Procurement) mirror:
   supplier onboarding, tender tracking, and an opt-in gateway connector
+- **Kenya Fleet** — government-aligned fleet management: vehicles, drivers,
+  fuel, maintenance, insurance, accident reporting, disposal, and an opt-in
+  GVMS connector
 
 > Self-documenting project: every script, doc, and module in this repository
 > explains itself. Start at [Quickstart](docs/01-quickstart.md).
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│  ERPNext v16  +  HRMS  +  kenya_hr  +  kenya_procurement      │
+│  ERPNext v16  +  HRMS  +  kenya_hr + kenya_procurement        │
+│                                +  kenya_fleet                 │
 │                                                              │
-│  HR · Leave · Promotions · HRIS-K · Procurement · E-GP        │
+│  HR · Promotions · HRIS-K · Procurement · E-GP · Fleet · GVMS │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -24,6 +28,7 @@ procurement, with two custom apps:
 | --- | --- |
 | [`apps/kenya_hr/`](apps/kenya_hr/) | Custom Frappe app: Kenya employee fields, statutory leave types, Staff Promotion workflow, Kenya HR Settings, HRIS-K client |
 | [`apps/kenya_procurement/`](apps/kenya_procurement/) | Custom Frappe app: E-GP procurement - Supplier Onboarding, Tender/Bid mirroring, Kenya EGP Settings, opt-in connector |
+| [`apps/kenya_fleet/`](apps/kenya_fleet/) | Custom Frappe app: Fleet Management - Vehicle, Driver, Fuel Log, Maintenance, Insurance, Accidents, Disposal, GVMS Settings, opt-in connector |
 | [`docker/`](docker/) | Image build files (`apps.json`, `Containerfile.kenya_hr`) and env template |
 | [`scripts/`](scripts/) | Repeatable ops: deploy, teardown, bench, backup, restore |
 | [`docs/`](docs/) | Full documentation (all guides) |
@@ -38,8 +43,8 @@ procurement, with two custom apps:
 Then open **http://erp.localhost:8080** — `Administrator` / `admin`
 (add `127.0.0.1 erp.localhost` to `/etc/hosts`).
 
-The deploy script builds a custom image with ERPNext + HRMS, layers both custom
-apps on top, and creates a site with all four apps installed. See
+The deploy script builds a custom image with ERPNext + HRMS, layers all three
+custom apps on top, and creates a site with all five apps installed. See
 [Deployment](docs/02-docker-deployment.md) for production options (domains,
 passwords, ports, SSL, updates).
 
@@ -69,6 +74,23 @@ See the [HR configuration guide](docs/04-hr-configuration.md) and the
 
 See [Procurement & E-GP integration](docs/11-procurement-egp.md).
 
+## Fleet features (from the custom app)
+
+- **Vehicle register** — GVMS-style master: registration, Transport Policy 2024
+  categories, stock/ops facts, status, tracking device + GPS telemetry
+- **Drivers & allocations** — NTSA licence data (classes A-D), certifications,
+  Vehicle Assignment with overlap guard (one active allocation per vehicle)
+- **Fuel & maintenance** — submittable Fuel Logs (derived unit price, advanced
+  odometer) and Maintenance Records (next-service planning)
+- **Insurance & accidents** — per-vehicle cover that auto-expires, incident
+  reports with police/insurance references
+- **Disposal** — age-based retirement (7-10 yrs) that retires the Vehicle
+- **Optional GVMS connector** — opt-in `gvms_sync.py`: real-time fuel/
+  maintenance push on submit, daily registry sync, hourly GPS pull
+- **Reports** — Fuel Consumption, Fleet Register, Fleet Compliance
+
+See [Fleet Management](docs/10-fleet-management-reference.md).
+
 ## Documentation index
 
 | Topic | Doc |
@@ -82,7 +104,7 @@ See [Procurement & E-GP integration](docs/11-procurement-egp.md).
 | Roles & permissions | [07-roles-permissions.md](docs/07-roles-permissions.md) |
 | Backup & restore | [08-backup-restore.md](docs/08-backup-restore.md) |
 | Architecture | [09-architecture.md](docs/09-architecture.md) |
-| Fleet management (optional) | [10-fleet-management-reference.md](docs/10-fleet-management-reference.md) |
+| Fleet management | [10-fleet-management-reference.md](docs/10-fleet-management-reference.md) |
 | Procurement & E-GP | [11-procurement-egp.md](docs/11-procurement-egp.md) |
 
 Root-level `*.md` guides (`erpnext-setup-guide.md`, `erpnext-customization-guide.md`,
@@ -95,6 +117,7 @@ this project was built on; keep them for reference.
 .
 ├── apps/kenya_hr/            # custom HR app (installable via bench)
 ├── apps/kenya_procurement/   # custom procurement app (installable via bench)
+├── apps/kenya_fleet/         # custom fleet app (installable via bench)
 ├── docker/                   # image build + env template
 ├── scripts/                  # deploy / teardown / bench / backup / restore
 ├── docs/                     # documentation (start here)

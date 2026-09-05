@@ -1,6 +1,7 @@
 # Quickstart
 
-Spin up a full ERPNext + HRMS + **Kenya HR** stack in about 10-15 minutes.
+Spin up a full ERPNext + HRMS + **Kenya HR + Procurement + Fleet** stack in
+about 10-15 minutes.
 
 ## Prerequisites
 
@@ -32,6 +33,7 @@ Open **http://erp.localhost:8080** and log in with `Administrator` / `admin`.
 | `hrms` | Employees, Leave Application, Payroll, Attendance |
 | `kenya_hr` | Kenya employee ID fields, statutory leave types, Staff Promotion workflow, Kenya HR Settings |
 | `kenya_procurement` | E-GP procurement: Supplier Onboarding, Tender mirroring, bids, Kenya EGP Settings |
+| `kenya_fleet` | Fleet Management: Vehicle, Driver, Vehicle Assignment, Fuel Log, Maintenance, Insurance, Accidents, Disposal, GVMS Settings |
 
 The `kenya_hr` app is installed *automatically*; its `after_install` creates:
 
@@ -45,6 +47,11 @@ The `kenya_procurement` app is installed too; its `after_install` creates the
 `Procurement Manager` and `Procurement Officer` roles and a `Kenya EGP Settings`
 single. The E-GP connector stays **off** until you enable it (see
 [Procurement & E-GP](11-procurement-egp.md)).
+
+The `kenya_fleet` app is installed too; its `after_install` creates the
+`Fleet Manager` and `Driver` roles and a `GVMS Settings` single. The GVMS
+connector stays **off** until you enable it (see
+[Fleet Management](10-fleet-management-reference.md)).
 
 ## Try the HR features
 
@@ -65,6 +72,18 @@ single. The E-GP connector stays **off** until you enable it (see
 3. **Add bids** — open a tender → Tender Bids child table.
 4. **Review the pipeline** — Kenya Procurement → Reports → Tender Pipeline.
 
+## Try the fleet features
+
+1. **Register a vehicle** — Fleet Management → Vehicle → New (registration
+   `GK A123B`, category **Official**, then Save).
+2. **Allocate it** — Fleet Management → Vehicle Assignment → New (the Vehicle
+   flips to **Assigned**; overlapping allocations are blocked).
+3. **Log fuel** — Fleet Management → Fuel Log → New, then **Submit** (unit
+   price derives; the Vehicle odometer advances).
+4. **Add cover** — Fleet Management → Insurance Policy → New (auto-expires).
+5. **Compliance** — Fleet Management → Reports → Fleet Compliance (insurance,
+   licenses and scheduled maintenance due in 30 days).
+
 ## Stop / remove
 
 ```bash
@@ -82,4 +101,5 @@ single. The E-GP connector stays **off** until you enable it (see
 - [Roles & permissions](07-roles-permissions.md)
 - [Backup & restore](08-backup-restore.md)
 - [Architecture](09-architecture.md)
+- [Fleet Management](10-fleet-management-reference.md)
 - [Procurement & E-GP](11-procurement-egp.md)

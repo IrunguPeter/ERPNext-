@@ -1,0 +1,134 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-09-05 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "vehicle",
+  "disposal_reason",
+  "inspection_date",
+  "valuation_amount",
+  "section_break_disposal",
+  "disposal_date",
+  "disposal_method",
+  "buyer",
+  "disposal_amount",
+  "certificate_number",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Vehicle",
+   "options": "Vehicle",
+   "reqd": 1
+  },
+  {
+   "fieldname": "disposal_reason",
+   "fieldtype": "Select",
+   "label": "Disposal Reason",
+   "options": "Age Based\nCondition Based\nBeyond Economical Repair\nFunding/Duration Closure\nOther",
+   "reqd": 1,
+   "description": "Age-based disposal follows the Transport Policy 2024 age bands (7-10 years by class)."
+  },
+  {
+   "fieldname": "inspection_date",
+   "fieldtype": "Date",
+   "label": "Inspection Date"
+  },
+  {
+   "fieldname": "valuation_amount",
+   "fieldtype": "Currency",
+   "label": "Valuation Amount (KSh)"
+  },
+  {
+   "fieldname": "section_break_disposal",
+   "fieldtype": "Section Break",
+   "label": "Disposal"
+  },
+  {
+   "fieldname": "disposal_date",
+   "fieldtype": "Date",
+   "label": "Disposal Date",
+   "default": "Today"
+  },
+  {
+   "fieldname": "disposal_method",
+   "fieldtype": "Select",
+   "label": "Disposal Method",
+   "options": "Public Auction\nTransfer to another MDAC\nScrapping\nOther"
+  },
+  {
+   "fieldname": "buyer",
+   "fieldtype": "Data",
+   "label": "Buyer / Recipient"
+  },
+  {
+   "fieldname": "disposal_amount",
+   "fieldtype": "Currency",
+   "label": "Disposal Amount (KSh)"
+  },
+  {
+   "fieldname": "certificate_number",
+   "fieldtype": "Data",
+   "label": "Disposal Certificate No."
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Proposed\nApproved\nCompleted",
+   "default": "Proposed",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "description": "Setting to Completed marks the vehicle as Retired."
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_virtual": 0,
+ "links": [],
+ "modified": "2026-09-05 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Fleet Management",
+ "name": "Vehicle Disposal",
+ "naming_rule": "Expression",
+ "autoname": "DSP-.YYYY.-.#####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Fleet Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Administrator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Driver",
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

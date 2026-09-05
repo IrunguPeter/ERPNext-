@@ -1,0 +1,134 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-09-05 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "policy_number",
+  "insurance_company",
+  "vehicle",
+  "policy_type",
+  "start_date",
+  "end_date",
+  "premium_amount",
+  "coverage_amount",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "policy_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Policy Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "insurance_company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Insurance Company",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Vehicle",
+   "options": "Vehicle",
+   "reqd": 1
+  },
+  {
+   "fieldname": "policy_type",
+   "fieldtype": "Select",
+   "label": "Policy Type",
+   "options": "Comprehensive\nThird Party\nFire and Theft\nSpecialized",
+   "default": "Comprehensive"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "End Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "premium_amount",
+   "fieldtype": "Currency",
+   "label": "Premium (KSh)"
+  },
+  {
+   "fieldname": "coverage_amount",
+   "fieldtype": "Currency",
+   "label": "Coverage Amount (KSh)"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nExpired\nCancelled",
+   "default": "Active",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "description": "Auto-expires when the end date passes."
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_virtual": 0,
+ "links": [],
+ "modified": "2026-09-05 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Fleet Management",
+ "name": "Insurance Policy",
+ "naming_rule": "Expression",
+ "autoname": "INS-.YYYY.-.#####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Fleet Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Administrator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Driver",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Employee",
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
