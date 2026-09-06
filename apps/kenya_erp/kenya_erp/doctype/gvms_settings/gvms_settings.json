@@ -1,0 +1,139 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-09-05 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "enabled",
+  "section_break_connector",
+  "base_url",
+  "api_endpoint",
+  "api_key",
+  "organization_code",
+  "section_break_sync",
+  "last_sync",
+  "last_location_sync",
+  "sync_vehicles",
+  "sync_fuel_logs",
+  "sync_maintenance",
+  "sync_vehicle_locations"
+ ],
+ "fields": [
+  {
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enable GVMS Connector",
+   "description": "Master switch for the connector. Leave unchecked to use the app as manual records only."
+  },
+  {
+   "fieldname": "section_break_connector",
+   "fieldtype": "Section Break",
+   "label": "Connector"
+  },
+  {
+   "fieldname": "base_url",
+   "fieldtype": "Data",
+   "label": "GVMS Portal URL",
+   "description": "Set automatically on install (https://gvms.go.ke)."
+  },
+  {
+   "fieldname": "api_endpoint",
+   "fieldtype": "Data",
+   "label": "API Gateway Endpoint",
+   "description": "GVMS does not publish a public REST API. Point this at a gateway/middleware endpoint (yours or the government's, when available) that exposes the app's expected JSON shape. See docs/10-fleet-management-reference.md."
+  },
+  {
+   "fieldname": "api_key",
+   "fieldtype": "Password",
+   "label": "API Key",
+   "description": "Gateway key sent as the X-GVMS-Key header. Stored as a password field; never leaves the system."
+  },
+  {
+   "fieldname": "organization_code",
+   "fieldtype": "Data",
+   "label": "Organization Code",
+   "description": "MDAC/county code on the GVMS registry."
+  },
+  {
+   "fieldname": "section_break_sync",
+   "fieldtype": "Section Break",
+   "label": "Synchronisation"
+  },
+  {
+   "fieldname": "last_sync",
+   "fieldtype": "Datetime",
+   "label": "Last Successful Sync",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_location_sync",
+   "fieldtype": "Datetime",
+   "label": "Last Location Sync",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sync_vehicles",
+   "fieldtype": "Check",
+   "label": "Synchronise Vehicles",
+   "default": 1,
+   "description": "Push the local vehicle registry to the gateway."
+  },
+  {
+   "fieldname": "sync_fuel_logs",
+   "fieldtype": "Check",
+   "label": "Synchronise Fuel Logs",
+   "default": 1,
+   "description": "Push submitted fuel logs to the gateway."
+  },
+  {
+   "fieldname": "sync_maintenance",
+   "fieldtype": "Check",
+   "label": "Synchronise Maintenance",
+   "default": 1,
+   "description": "Push submitted maintenance records to the gateway."
+  },
+  {
+   "fieldname": "sync_vehicle_locations",
+   "fieldtype": "Check",
+   "label": "Synchronise Vehicle Locations",
+   "default": 1,
+   "description": "Hourly GPS pull for vehicles with a tracking device id."
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_virtual": 0,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-09-05 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Kenya ERP",
+ "name": "GVMS Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Fleet Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Administrator",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,145 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_company",
+  "company",
+  "column_break_1",
+  "default_leave_type",
+  "mark_public_holidays_on_leave",
+  "section_promotions",
+  "enable_promotion_workflow",
+  "promotion_requires_director_approval",
+  "section_hris_k",
+  "enable_hris_k_sync",
+  "hris_k_base_url",
+  "hris_k_api_key",
+  "hris_k_organization_code",
+  "section_about",
+  "about_note"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_company",
+   "fieldtype": "Section Break",
+   "label": "Company"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_leave_type",
+   "fieldtype": "Link",
+   "label": "Default Annual Leave Type",
+   "options": "Leave Type"
+  },
+  {
+   "default": "0",
+   "fieldname": "mark_public_holidays_on_leave",
+   "fieldtype": "Check",
+   "label": "Ensure Public Holidays are marked in the Leave Calendar"
+  },
+  {
+   "fieldname": "section_promotions",
+   "fieldtype": "Section Break",
+   "label": "Staff Promotions"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_promotion_workflow",
+   "fieldtype": "Check",
+   "label": "Enable Multi-Stage Promotion Workflow",
+   "description": "Enforce the Draft → Department Head → Director → Effective workflow defined in Staff Promotion."
+  },
+  {
+   "default": "1",
+   "fieldname": "promotion_requires_director_approval",
+   "fieldtype": "Check",
+   "label": "Promotions Require Director Approval",
+   "description": "When set, promotions stop at 'Approved by Department Head' until a Director/Senior HR Approver sign-off."
+  },
+  {
+   "fieldname": "section_hris_k",
+   "fieldtype": "Section Break",
+   "label": "HRIS-K Integration"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_hris_k_sync",
+   "fieldtype": "Check",
+   "label": "Enable HRIS-K Synchronisation",
+   "description": "Opt-in synchronisation with the Kenya HRIS-K API. See docs/06-hris-k-integration.md."
+  },
+  {
+   "fieldname": "hris_k_base_url",
+   "fieldtype": "Data",
+   "label": "HRIS-K Base URL",
+   "description": "e.g. https://uhr.kenya.go.ke/api"
+  },
+  {
+   "fieldname": "hris_k_api_key",
+   "fieldtype": "Password",
+   "label": "HRIS-K API Key"
+  },
+  {
+   "fieldname": "hris_k_organization_code",
+   "fieldtype": "Data",
+   "label": "HRIS-K Organization Code"
+  },
+  {
+   "fieldname": "section_about",
+   "fieldtype": "Section Break",
+   "label": "About This App"
+  },
+  {
+   "fieldname": "about_note",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Kenya ERP",
+ "name": "Kenya HR Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Kenya HR Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Administrator",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1,
+ "translated_doctype": 1
+}

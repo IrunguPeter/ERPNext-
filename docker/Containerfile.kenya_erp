@@ -1,0 +1,27 @@
+# Kenya ERP container image
+#
+# Stage 2 of a two-stage build.
+#
+#   Stage 1 (in frappe_docker): builds `erpnext-hrms:16` from docker/apps.json
+#       using the official `images/layered/Containerfile`.
+#   Stage 2 (this file): takes that image and copies this repository's
+#       consolidated app (kenya_erp) into the bench `apps/` directory.
+#
+# Build from the repository root:
+#
+#   docker build \
+#       -f docker/Containerfile.kenya_erp \
+#       --build-arg BASE_IMAGE=erpnext-hrms:16 \
+#       -t kenya-erp-stack:16 .
+#
+ARG BASE_IMAGE=erpnext-hrms:16
+FROM ${BASE_IMAGE}
+
+USER root
+
+# Bring the custom app sources into the bench and give them to the frappe user.
+COPY apps/kenya_erp /home/frappe/frappe-bench/apps/kenya_erp
+RUN chown -R frappe:frappe /home/frappe/frappe-bench/apps/kenya_erp \
+    && rm -rf /home/frappe/frappe-bench/apps/kenya_erp/.git
+
+USER frappe

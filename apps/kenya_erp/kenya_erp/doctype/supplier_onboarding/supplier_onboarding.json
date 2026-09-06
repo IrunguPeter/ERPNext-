@@ -1,0 +1,178 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-09-05 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "supplier",
+  "section_break_documentation",
+  "business_registration_no",
+  "kra_pin",
+  "business_email",
+  "county",
+  "section_break_authorised_rep",
+  "authorized_representative",
+  "authorized_rep_national_id",
+  "section_break_categories",
+  "business_categories",
+  "agpo_eligible",
+  "agpo_category",
+  "section_break_egp",
+  "egp_status",
+  "onboarding_date",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_documentation",
+   "fieldtype": "Section Break",
+   "label": "E-GP Documentation"
+  },
+  {
+   "fieldname": "business_registration_no",
+   "fieldtype": "Data",
+   "label": "Business Registration No. (BRS)",
+   "description": "Certificate of incorporation/registration as registered with the Business Registration Service. Verified against BRS by E-GP in real time."
+  },
+  {
+   "fieldname": "kra_pin",
+   "fieldtype": "Data",
+   "label": "KRA PIN",
+   "description": "Tax Identification Number verified against iTax."
+  },
+  {
+   "fieldname": "business_email",
+   "fieldtype": "Data",
+   "label": "Business Email",
+   "description": "E-GP requires a private-domain business email (public domains are rejected)."
+  },
+  {
+   "fieldname": "county",
+   "fieldtype": "Data",
+   "label": "County",
+   "description": "County where the business operates (of the 47 counties)."
+  },
+  {
+   "fieldname": "section_break_authorised_rep",
+   "fieldtype": "Section Break",
+   "label": "Authorised Representative"
+  },
+  {
+   "fieldname": "authorized_representative",
+   "fieldtype": "Data",
+   "label": "Authorised Representative",
+   "description": "Owner / director / authorised person who manages the E-GP account."
+  },
+  {
+   "fieldname": "authorized_rep_national_id",
+   "fieldtype": "Data",
+   "label": "Authorised Rep National ID",
+   "description": "National ID of the authorised representative (verified against IPRS)."
+  },
+  {
+   "fieldname": "section_break_categories",
+   "fieldtype": "Section Break",
+   "label": "Business Categories"
+  },
+  {
+   "fieldname": "business_categories",
+   "fieldtype": "Table",
+   "label": "Business Categories",
+   "options": "Supplier Category",
+   "description": "Procurement categories you are registered in - procuring entities search by these."
+  },
+  {
+   "fieldname": "agpo_eligible",
+   "fieldtype": "Check",
+   "label": "AGPO Eligible",
+   "description": "Eligible for the 30% government set-aside programme (Access to Government Procurement Opportunities)."
+  },
+  {
+   "fieldname": "agpo_category",
+   "fieldtype": "Select",
+   "label": "AGPO Category",
+   "options": "\nYouth Enterprise\nWomen Enterprise\nPersons with Disability Enterprise"
+  },
+  {
+   "fieldname": "section_break_egp",
+   "fieldtype": "Section Break",
+   "label": "E-GP Status"
+  },
+  {
+   "fieldname": "egp_status",
+   "fieldtype": "Select",
+   "label": "E-GP Status",
+   "options": "\nNot Registered\nPending Verification\nRegistered\nSuspended",
+   "default": "Not Registered",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "onboarding_date",
+   "fieldtype": "Date",
+   "label": "Onboarding Date",
+   "description": "Date the supplier was onboarded on the E-GP portal."
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "grid_search_fields": [
+  "supplier"
+ ],
+ "index_web_pages_for_search": 1,
+ "is_virtual": 0,
+ "links": [],
+ "modified": "2026-09-05 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Kenya ERP",
+ "name": "Supplier Onboarding",
+ "naming_rule": "Expression",
+ "autoname": "SUP-.YYYY.-.#####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Procurement Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Administrator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Procurement Officer",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# deploy-docker.sh - build and run the ERPNext + HRMS + Kenya HR stack with Docker.
+# deploy-docker.sh - build and run the ERPNext + HRMS + Kenya ERP stack with Docker.
 #
 # This is a thin, documented wrapper around the official frappe_docker project:
 #   https://github.com/frappe/frappe_docker
@@ -8,12 +8,11 @@
 # It performs the following steps (each one is independently re-runnable):
 #   1. Clones frappe_docker (pinned ref) into ./.frappe_docker
 #   2. Builds a custom image with ERPNext + HRMS (docker/apps.json)
-#   3. Layers the Kenya HR + Kenya Procurement + Kenya Fleet apps on top
-#      (docker/Containerfile.kenya_hr)
+#   3. Layers the consolidated Kenya ERP app on top
+#      (docker/Containerfile.kenya_erp)
 #   4. Generates the final compose file
 #   5. Starts all containers
-#   6. Creates a site and installs erpnext, hrms, kenya_hr, kenya_procurement,
-#      kenya_fleet
+#   6. Creates a site and installs erpnext, hrms, kenya_erp
 #
 # Usage:
 #   ./scripts/deploy-docker.sh [options]
@@ -72,9 +71,9 @@ docker compose version >/dev/null 2>&1 || { echo "docker compose v2 is required"
 command -v jq >/dev/null 2>&1 || { echo "jq is required (apt install jq)"; exit 1; }
 
 FRAPPE_DOCKER_DIR="$REPO_DIR/.frappe_docker"
-CUSTOM_IMAGE="kenya-hr-stack:16"
+CUSTOM_IMAGE="kenya-erp-stack:16"
 
-echo "==> Kenya HR stack deploy script"
+echo "==> Kenya ERP stack deploy script"
 echo "    site: $SITE  admin-pass: $ADMIN_PASSWORD  port: $HTTP_PUBLISH_PORT"
 echo "    erpnext image tag: $ERPNEXT_VERSION  dev mode: $([ "$DEV_MODE" = 1 ] && echo yes || echo no)"
 
@@ -117,9 +116,9 @@ docker build \
   --file=images/layered/Containerfile .
 popd >/dev/null
 
-echo "==> Layering Kenya HR + Kenya Procurement + Kenya Fleet apps ..."
+echo "==> Layering Kenya ERP app ..."
 docker build \
-  -f docker/Containerfile.kenya_hr \
+  -f docker/Containerfile.kenya_erp \
   --build-arg BASE_IMAGE=erpnext-hrms:16 \
   -t "$CUSTOM_IMAGE" .
 
@@ -172,12 +171,8 @@ else
     --install-app erpnext
   echo "==> Installing hrms ..."
   RUN --site "$SITE" install-app hrms
-  echo "==> Installing kenya_hr ..."
-  RUN --site "$SITE" install-app kenya_hr
-  echo "==> Installing kenya_procurement ..."
-  RUN --site "$SITE" install-app kenya_procurement
-  echo "==> Installing kenya_fleet ..."
-  RUN --site "$SITE" install-app kenya_fleet
+  echo "==> Installing kenya_erp ..."
+  RUN --site "$SITE" install-app kenya_erp
 fi
 
 docker compose -f "$COMPOSE_OUT" exec backend bench --site "$SITE" clear-cache >/dev/null 2>&1 || true

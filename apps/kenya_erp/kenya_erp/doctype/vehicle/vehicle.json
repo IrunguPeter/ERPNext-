@@ -1,0 +1,207 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-09-05 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "registration_number",
+  "vehicle_category",
+  "make",
+  "model",
+  "year",
+  "color",
+  "engine_number",
+  "chassis_number",
+  "fuel_type",
+  "seating_capacity",
+  "department",
+  "section_break_operations",
+  "odometer_reading",
+  "status",
+  "tracking_device_id",
+  "section_break_telemetry",
+  "current_latitude",
+  "current_longitude",
+  "last_tracking_update",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "registration_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Registration Number",
+   "reqd": 1,
+   "description": "Official number plate, e.g. GK A123B. Synced to GVMS."
+  },
+  {
+   "fieldname": "vehicle_category",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "Vehicle Category",
+   "options": "Executive\nOfficial\nGeneral Purpose\nUtility\nSecurity\nAmbulance\nSpecialized",
+   "reqd": 1,
+   "description": "Mapped to the GoK Transport Policy 2024 user classes."
+  },
+  {
+   "fieldname": "make",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Make"
+  },
+  {
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Model"
+  },
+  {
+   "fieldname": "year",
+   "fieldtype": "Int",
+   "label": "Year of Manufacture"
+  },
+  {
+   "fieldname": "color",
+   "fieldtype": "Data",
+   "label": "Color"
+  },
+  {
+   "fieldname": "engine_number",
+   "fieldtype": "Data",
+   "label": "Engine Number"
+  },
+  {
+   "fieldname": "chassis_number",
+   "fieldtype": "Data",
+   "label": "Chassis Number"
+  },
+  {
+   "fieldname": "fuel_type",
+   "fieldtype": "Select",
+   "label": "Fuel Type",
+   "options": "Diesel\nPetrol\nHybrid\nElectric",
+   "default": "Diesel",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "seating_capacity",
+   "fieldtype": "Int",
+   "label": "Seating Capacity"
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department",
+   "description": "User department to which the vehicle is configured (per Transport Policy 2024)."
+  },
+  {
+   "fieldname": "section_break_operations",
+   "fieldtype": "Section Break",
+   "label": "Operations"
+  },
+  {
+   "fieldname": "odometer_reading",
+   "fieldtype": "Float",
+   "label": "Current Odometer Reading (km)"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Available\nAssigned\nUnder Maintenance\nRetired",
+   "default": "Available",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "description": "Available / Assigned / Under Maintenance / Retired (set to Retired automatically when a Vehicle Disposal completes)."
+  },
+  {
+   "fieldname": "tracking_device_id",
+   "fieldtype": "Data",
+   "label": "Tracking Device ID",
+   "description": "GVMS/GPS telematics device identifier used by the location sync."
+  },
+  {
+   "fieldname": "section_break_telemetry",
+   "fieldtype": "Section Break",
+   "label": "GVMS Telemetry",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "current_latitude",
+   "fieldtype": "Data",
+   "label": "Current Latitude",
+   "read_only": 1,
+   "description": "Updated by the hourly GVMS location sync."
+  },
+  {
+   "fieldname": "current_longitude",
+   "fieldtype": "Data",
+   "label": "Current Longitude",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_tracking_update",
+   "fieldtype": "Datetime",
+   "label": "Last Tracking Update",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_virtual": 0,
+ "links": [],
+ "modified": "2026-09-05 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Kenya ERP",
+ "name": "Vehicle",
+ "naming_rule": "Expression",
+ "autoname": "VHC-.YYYY.-.#####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Fleet Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Administrator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Driver",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Employee",
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

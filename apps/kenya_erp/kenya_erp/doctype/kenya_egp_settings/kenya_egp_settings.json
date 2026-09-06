@@ -1,0 +1,116 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-09-05 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "enabled",
+  "section_break_connector",
+  "base_url",
+  "supplier_registration_url",
+  "api_endpoint",
+  "api_token",
+  "section_break_status",
+  "last_sync",
+  "sync_tenders",
+  "sync_suppliers"
+ ],
+ "fields": [
+  {
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enable E-GP Connector",
+   "description": "Master switch for the connector. Leave unchecked to use the app as manual records only."
+  },
+  {
+   "fieldname": "section_break_connector",
+   "fieldtype": "Section Break",
+   "label": "Connector"
+  },
+  {
+   "fieldname": "base_url",
+   "fieldtype": "Data",
+   "label": "E-GP Portal URL",
+   "description": "Set automatically on install (https://egpkenya.go.ke)."
+  },
+  {
+   "fieldname": "supplier_registration_url",
+   "fieldtype": "Data",
+   "label": "Supplier Registration URL",
+   "description": "Deep link to the E-GP supplier registration module."
+  },
+  {
+   "fieldname": "api_endpoint",
+   "fieldtype": "Data",
+   "label": "API Gateway Endpoint",
+   "description": "E-GP does not publish a public REST API. Point this at a gateway/middleware endpoint (yours or National Treasury's, when available) that exposes tender/supplier data in the app's expected JSON shape. See docs/11-procurement-egp.md."
+  },
+  {
+   "fieldname": "api_token",
+   "fieldtype": "Password",
+   "label": "API Token / Key",
+   "description": "Bearer token for the gateway endpoint. Stored as a password field; never leaves the system."
+  },
+  {
+   "fieldname": "section_break_status",
+   "fieldtype": "Section Break",
+   "label": "Synchronisation"
+  },
+  {
+   "fieldname": "last_sync",
+   "fieldtype": "Datetime",
+   "label": "Last Successful Sync",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sync_tenders",
+   "fieldtype": "Check",
+   "label": "Synchronise Tenders",
+   "default": 1,
+   "description": "Pull tender notices from the gateway and mirror them as Tender records."
+  },
+  {
+   "fieldname": "sync_suppliers",
+   "fieldtype": "Check",
+   "label": "Synchronise Supplier Status",
+   "default": 1,
+   "description": "Refresh supplier E-GP registration status against the gateway."
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_virtual": 0,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-09-05 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Kenya ERP",
+ "name": "Kenya EGP Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Procurement Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Administrator",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

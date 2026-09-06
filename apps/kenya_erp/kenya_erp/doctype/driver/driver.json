@@ -1,0 +1,134 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-09-05 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "license_number",
+  "license_class",
+  "license_issue_date",
+  "license_expiry",
+  "issuing_authority",
+  "section_break_certifications",
+  "defensive_driving_cert",
+  "first_aid_cert",
+  "medical_fitness_valid_until",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1,
+   "description": "HRMS employee record for this driver."
+  },
+  {
+   "fieldname": "license_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Driving License Number",
+   "reqd": 1,
+   "description": "NTSA driving license number."
+  },
+  {
+   "fieldname": "license_class",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "License Class",
+   "options": "A (Motorcycles)\nB (Light Vehicles)\nC (Medium Vehicles)\nD (Heavy Vehicles)",
+   "description": "NTSA licence class."
+  },
+  {
+   "fieldname": "license_issue_date",
+   "fieldtype": "Date",
+   "label": "License Issue Date"
+  },
+  {
+   "fieldname": "license_expiry",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "License Expiry",
+   "description": "Shown in the Fleet Compliance report when due."
+  },
+  {
+   "fieldname": "issuing_authority",
+   "fieldtype": "Data",
+   "label": "Issuing Authority",
+   "default": "NTSA"
+  },
+  {
+   "fieldname": "section_break_certifications",
+   "fieldtype": "Section Break",
+   "label": "Certifications"
+  },
+  {
+   "fieldname": "defensive_driving_cert",
+   "fieldtype": "Check",
+   "label": "Defensive Driving Certification"
+  },
+  {
+   "fieldname": "first_aid_cert",
+   "fieldtype": "Check",
+   "label": "First Aid Certification"
+  },
+  {
+   "fieldname": "medical_fitness_valid_until",
+   "fieldtype": "Date",
+   "label": "Medical Fitness Valid Until"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_virtual": 0,
+ "links": [],
+ "modified": "2026-09-05 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Kenya ERP",
+ "name": "Driver",
+ "naming_rule": "Expression",
+ "autoname": "DRV-.YYYY.-.#####",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Fleet Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Administrator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Employee",
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

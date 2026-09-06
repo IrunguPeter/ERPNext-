@@ -4,7 +4,7 @@ Every script is idempotent where possible and prints what it is doing.
 
 | Script | Purpose |
 | --- | --- |
-| [`deploy-docker.sh`](deploy-docker.sh) | Full Docker deployment: builds the ERPNext + HRMS + Kenya HR image, starts the stack, and creates the site with all three apps installed. |
+| [`deploy-docker.sh`](deploy-docker.sh) | Full Docker deployment: builds the ERPNext + HRMS + Kenya ERP image, starts the stack, and creates the site with the app installed. |
 | [`teardown-docker.sh`](teardown-docker.sh) | Stops the stack. Use `--volumes` to also **delete** your data. |
 | [`bench.sh`](bench.sh) | Runs `bench` commands inside the backend container for a given site. |
 | [`backup.sh`](backup.sh) | Creates a database (and optional file) backup. |
@@ -34,7 +34,7 @@ Every script is idempotent where possible and prints what it is doing.
 
 ## Development loop
 
-When making changes to `apps/kenya_hr`, rebuild the image and re-run a
+When making changes to `apps/kenya_erp`, rebuild the image and re-run a
 migration, or use the `--dev` flag of `deploy-docker.sh` and iterate with:
 
 ```bash
