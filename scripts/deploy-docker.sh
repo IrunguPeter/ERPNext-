@@ -25,10 +25,12 @@
 #   -e, --env FILE       .env file used for the compose pipeline (default: docker/.env)
 #   --version TAG        ERPNext image version tag (default: v16.34.1)
 #   --dev                Mount the local app source instead of baking it (dev loop)
+#   --with-keycloak      Also start Keycloak (SSO) and provision realm/client
 #   -h, --help           Show this help
 #
 # Examples:
 #   ./scripts/deploy-docker.sh                          # local demo stack
+#   ./scripts/deploy-docker.sh --with-keycloak          # + Keycloak SSO
 #   ./scripts/deploy-docker.sh --site erp.example.com --admin-pass s3cret \
 #         --db-pass s3cret --port 80                    # production-ish box
 set -euo pipefail
@@ -45,9 +47,10 @@ DB_PASSWORD="123"
 HTTP_PUBLISH_PORT="8080"
 ERPNEXT_VERSION="v16.34.1"
 DEV_MODE=0
+WITH_KEYCLOAK=0
 DOT_ENV="docker/.env"
 
-usage() { sed -n '2,40p' "$0"; }
+usage() { sed -n '2,35p' "$0"; }
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -58,6 +61,7 @@ while [[ $# -gt 0 ]]; do
     -e|--env) DOT_ENV="$2"; shift 2 ;;
     --version) ERPNEXT_VERSION="$2"; shift 2 ;;
     --dev) DEV_MODE=1; shift ;;
+    --with-keycloak) WITH_KEYCLOAK=1; shift ;;
     -h|--help) usage; exit 0 ;;
     *) echo "Unknown option: $1"; usage; exit 1 ;;
   esac
@@ -138,22 +142,39 @@ HTTPS_PUBLISH_PORT=443
 CUSTOM_IMAGE=${CUSTOM_IMAGE%:*}
 CUSTOM_TAG=${CUSTOM_IMAGE##*:}
 PULL_POLICY=never
+KEYCLOAK_VERSION=${KEYCLOAK_VERSION:-23.0.4}
+KEYCLOAK_PUBLISH_PORT=${KEYCLOAK_PUBLISH_PORT:-18080}
+KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN:-admin}
+KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD:-admin}
 EOF
 
 # ---------------------------------------------------------------------------
 # 5. generate + start the compose stack
 # ---------------------------------------------------------------------------
 COMPOSE_OUT="$REPO_DIR/docker-compose.generated.yml"
+COMPOSE_FILES=(
+  -f "$FRAPPE_DOCKER_DIR/compose.yaml"
+  -f "$FRAPPE_DOCKER_DIR/overrides/compose.mariadb.yaml"
+  -f "$FRAPPE_DOCKER_DIR/overrides/compose.redis.yaml"
+  -f "$FRAPPE_DOCKER_DIR/overrides/compose.noproxy.yaml"
+)
+if [ "$WITH_KEYCLOAK" = 1 ]; then
+  COMPOSE_FILES+=(-f "$REPO_DIR/docker/overrides/compose.keycloak.yaml")
+fi
+
 echo "==> Rendering compose file ..."
-docker compose --env-file .env.deploy \
-  -f "$FRAPPE_DOCKER_DIR/compose.yaml" \
-  -f "$FRAPPE_DOCKER_DIR/overrides/compose.mariadb.yaml" \
-  -f "$FRAPPE_DOCKER_DIR/overrides/compose.redis.yaml" \
-  -f "$FRAPPE_DOCKER_DIR/overrides/compose.noproxy.yaml" \
-  config > "$COMPOSE_OUT"
+docker compose --env-file .env.deploy "${COMPOSE_FILES[@]}" config > "$COMPOSE_OUT"
 
 echo "==> Starting containers ..."
 docker compose -f "$COMPOSE_OUT" up -d
+
+if [ "$WITH_KEYCLOAK" = 1 ]; then
+  echo "==> Provisioning Keycloak realm + client ..."
+  "$REPO_DIR/scripts/setup-keycloak.sh" \
+    --kc-url "http://localhost:${KEYCLOAK_PUBLISH_PORT:-18080}" \
+    --admin "admin:${KEYCLOAK_ADMIN_PASSWORD:-admin}" || \
+    echo "WARNING: Keycloak provisioning failed - run scripts/setup-keycloak.sh manually."
+fi
 
 # ---------------------------------------------------------------------------
 # 6. create site + install apps
@@ -182,6 +203,10 @@ echo "Deployment complete."
 echo "  UI   : http://localhost:$HTTP_PUBLISH_PORT  (if your site is '$SITE', add:"
 echo "         '127.0.0.1 $SITE' to /etc/hosts and browse http://$SITE:$HTTP_PUBLISH_PORT)"
 echo "  Admin: Administrator / $ADMIN_PASSWORD"
+if [ "$WITH_KEYCLOAK" = 1 ]; then
+  echo "  Keycloak : http://localhost:${KEYCLOAK_PUBLISH_PORT:-18080}/ (admin/admin)"
+  echo "  Next     : ./scripts/setup-keycloak-sso.sh -- $SITE  to wire the login button"
+fi
 echo
 echo "Helpers:"
 echo "  ./scripts/bench.sh -- $SITE <cmd>       run bench commands"

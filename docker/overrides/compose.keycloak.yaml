@@ -1,0 +1,24 @@
+# Keycloak SSO overlay
+#
+# Adds Keycloak (Identity Provider) as an additional service on the same
+# Docker network as the ERPNext stack so the backend can reach it over the
+# default network (service hostname `keycloak:8080`), while publishing an
+# external port for the browser to reach the admin console / authorization
+# endpoints.
+#
+# Used by scripts/deploy-docker.sh with the `--with-keycloak` flag.
+#
+# Host port (18080) is separate from ERPNext's 8080 to avoid a clash. Adjust
+# KEYCLOAK_ADMIN / KEYCLOAK_ADMIN_PASSWORD in docker/.env for production.
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:${KEYCLOAK_VERSION:-23.0.4}
+    command: start-dev
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN:-admin}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-admin}
+      KC_HOSTNAME_PORT: ${KEYCLOAK_PUBLISH_PORT:-18080}
+    ports:
+      - "${KEYCLOAK_PUBLISH_PORT:-18080}:8080"
+    restart: unless-stopped
+    # Shares the default network so `keycloak:8080` resolves from the backend.

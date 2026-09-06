@@ -34,7 +34,15 @@ Everything lives in [`apps/kenya_erp/`](apps/kenya_erp/). All integrations are
 Open **http://erp.localhost:8080** — `Administrator` / `admin`
 (add `127.0.0.1 erp.localhost` to `/etc/hosts`).
 
-See [Deployment](docs/02-docker-deployment.md) for production options
+**Want Keycloak SSO too?**
+
+```bash
+./scripts/deploy-docker.sh --with-keycloak
+./scripts/setup-keycloak-sso.sh -- erp.localhost
+```
+
+See [Deployment](docs/02-docker-deployment.md) and
+[Keycloak SSO](docs/12-keycloak-sso.md) for production options
 (domains, passwords, ports, SSL, updates).
 
 ## Repo layout
@@ -61,6 +69,7 @@ See [Deployment](docs/02-docker-deployment.md) for production options
 | Docker deployment (prod) | [02-docker-deployment.md](docs/02-docker-deployment.md) |
 | Manual (bare-metal) install | [03-manual-install.md](docs/03-manual-install.md) |
 | HR / Procurement / Fleet | [04](docs/04-hr-configuration.md) · [11](docs/11-procurement-egp.md) · [10](docs/10-fleet-management-reference.md) |
+| Keycloak SSO | [12-keycloak-sso.md](docs/12-keycloak-sso.md) |
 | Roles & permissions | [07-roles-permissions.md](docs/07-roles-permissions.md) |
 | Backup & restore | [08-backup-restore.md](docs/08-backup-restore.md) |
 | Architecture | [09-architecture.md](docs/09-architecture.md) |

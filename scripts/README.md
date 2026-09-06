@@ -9,6 +9,8 @@ Every script is idempotent where possible and prints what it is doing.
 | [`bench.sh`](bench.sh) | Runs `bench` commands inside the backend container for a given site. |
 | [`backup.sh`](backup.sh) | Creates a database (and optional file) backup. |
 | [`restore.sh`](restore.sh) | Restores a database backup from inside the container. |
+| [`setup-keycloak.sh`](setup-keycloak.sh) | Provisions a Keycloak realm + OIDC client (Admin REST API). |
+| [`setup-keycloak-sso.sh`](setup-keycloak-sso.sh) | Creates/updates the ERPNext `keycloak` Social Login Key on a site. |
 
 ## Common usage
 
